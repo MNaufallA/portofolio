@@ -3,29 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Muhammad Naufal Adani</title>
+    <title>Portofolio | Muhammad Naufal Adani</title>
     <link rel="icon" href="profile-photo.jpg" type="image/jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
+        /* CSS Variables for theme colors */
         :root {
             --bg-dark: #030712;
             --bg-card: #111827;
             --primary-text: #f9fafb;
             --secondary-text: #9ca3af;
-            --accent-1: #38bdf8; 
-            --accent-2: #818cf8; 
+            --accent-1: #38bdf8;
+            --accent-2: #818cf8;
             --border-color: rgba(255, 255, 255, 0.1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
 
-        /* UKURAN DASAR UNTUK SCALING SELURUH UI */
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+
+        /* Base font size for responsive UI scaling */
         html {
             font-size: 15px;
         }
@@ -34,146 +49,422 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--primary-text);
-            line-height: 1.7; /* Sedikit disesuaikan untuk font yang lebih kecil */
-            font-size: 1rem; /* Mengikuti ukuran dasar dari html */
-            overflow: hidden;
+            line-height: 1.7;
+            font-size: 1rem; /* Follows the base size from html */
+            overflow: hidden; /* Prevent body scroll, main content will scroll instead */
         }
-        .main-container { height: 100vh; display: flex; flex-direction: column; }
+
+        /* --- Layout & Effects --- */
+        .main-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
         .spotlight {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: -1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
             background: radial-gradient(circle 500px at var(--x) var(--y), rgba(56, 189, 248, 0.1), transparent 80%);
         }
 
+        /* --- Navigation Bar --- */
         .navbar {
-            background: rgba(3, 7, 18, 0.5); backdrop-filter: blur(10px);
+            background: rgba(3, 7, 18, 0.5);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
         }
-        .navbar .container { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; max-width: 1200px; margin: 0 auto;}
-        .navbar .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary-text); text-decoration: none; }
-        .navbar ul { display: flex; list-style: none; }
-        .navbar ul li a { color: var(--secondary-text); text-decoration: none; margin: 0 1.2rem; font-weight: 600; font-size: 1.1rem; transition: color 0.3s; cursor: pointer; }
-        .navbar ul li a:hover, .navbar ul li a.active { color: var(--accent-1); }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .navbar .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-text);
+            text-decoration: none;
+        }
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+        .navbar ul li a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        .navbar ul li a:hover,
+        .navbar ul li a.active {
+            color: var(--accent-1);
+        }
 
-        main { flex-grow: 1; overflow-y: auto; position: relative; scroll-behavior: smooth; }
+        /* --- Main Content & Page Sections --- */
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            position: relative;
+            scroll-behavior: smooth;
+        }
         .page-section {
             padding: 4rem 2rem;
-            max-width: 1100px; margin: 0 auto;
-            position: absolute; top: 0; left: 0; right: 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s, transform 0.5s;
             transform: translateY(20px);
         }
-        .page-section.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        
+        .page-section.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        .section-nav {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* --- Hero Section --- */
         #hero {
-            display: flex; align-items: center; justify-content: center; text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             height: 100%;
         }
-        .hero-content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
         .hero-image {
-            width: 180px; height: 180px; border-radius: 50%; padding: 6px; /* DIKECILKAN */
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            padding: 6px;
             background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
             box-shadow: 0 0 50px rgba(56, 189, 248, 0.4);
         }
-        .hero-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid var(--bg-dark); /* DIKECILKAN */ }
-        #hero h1 { font-size: clamp(3rem, 7vw, 4.5rem); line-height: 1.1; }
-        .animated-subtitle {
-            font-size: clamp(1.3rem, 4vw, 1.7rem); color: var(--accent-1); font-weight: 600;
-            display: flex; height: 3rem; overflow: hidden; justify-content: center;
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--bg-dark);
         }
-        .animated-subtitle .titles { display: flex; flex-direction: column; animation: slide-titles 9s infinite; }
-        .animated-subtitle .titles span { line-height: 3rem; }
-        @keyframes slide-titles { 0%, 25% { transform: translateY(0); } 33%, 58% { transform: translateY(-3rem); } 66%, 92% { transform: translateY(-6rem); } 100% { transform: translateY(0); } }
-        .hero-buttons { display: flex; gap: 1rem; margin-top: 1rem; }
-        .cta-button { background: var(--accent-1); color: var(--bg-dark); padding: 0.8rem 1.8rem; border-radius: 5px; text-decoration: none; font-weight: 700; transition: all 0.3s; display: inline-block; }
-        .cta-button.secondary { background: transparent; color: var(--accent-1); border: 2px solid var(--accent-1); }
-        .cta-button:hover { transform: translateY(-3px); }
-        .hero-contact { display: flex; gap: 2rem; margin-top: 1.5rem; }
-        .hero-contact a { color: var(--secondary-text); font-size: 1.8rem; transition: color 0.3s; }
-        .hero-contact a:hover { color: var(--accent-1); }
+        #hero h1 {
+            font-size: clamp(3rem, 7vw, 4.5rem);
+            line-height: 1.1;
+        }
+        .animated-subtitle {
+            font-size: clamp(1.3rem, 4vw, 1.7rem);
+            color: var(--accent-1);
+            font-weight: 600;
+            display: flex;
+            height: 3rem;
+            overflow: hidden;
+            justify-content: center;
+        }
+        .animated-subtitle .titles {
+            display: flex;
+            flex-direction: column;
+            animation: slide-titles 9s infinite;
+        }
+        .animated-subtitle .titles span {
+            line-height: 3rem;
+        }
+        @keyframes slide-titles {
+            0%, 25% { transform: translateY(0); }
+            33%, 58% { transform: translateY(-3rem); }
+            66%, 92% { transform: translateY(-6rem); }
+            100% { transform: translateY(0); }
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .cta-button {
+            background: var(--accent-1);
+            color: var(--bg-dark);
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--accent-1);
+            border: 2px solid var(--accent-1);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+        .hero-contact {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .hero-contact a {
+            color: var(--secondary-text);
+            font-size: 1.8rem;
+            transition: color 0.3s;
+        }
+        .hero-contact a:hover {
+            color: var(--accent-1);
+        }
 
-        .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 4rem; position: relative; }
-        
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.8rem; /* DIKECILKAN */ }
+        /* --- About Section --- */
+        .about-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.1rem;
+        }
+
+        /* --- Cards & Grids --- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.8rem;
+        }
         .card {
-            background: var(--bg-card); border-radius: 12px;
+            background: var(--bg-card);
+            border-radius: 12px;
             border: 1px solid var(--border-color);
             transition: all 0.2s ease-out;
             transform-style: preserve-3d;
             cursor: pointer;
-            padding: 2.2rem; /* DIKECILKAN */
+            padding: 2.2rem;
         }
-        .card:hover { transform: translateY(-5px) !important; border-color: var(--accent-1); }
-        .card h3 { font-size: 1.4rem; }
-        .card h4 { color: var(--secondary-text); font-weight: 400; font-size: 1rem; }
-        .card .date { color: var(--accent-1); font-weight: 600; font-size: 0.95rem; margin-top: 0.5rem; }
-        
-        #experience .card-header { display: flex; align-items: center; gap: 1.5rem; }
+        .card:hover {
+            transform: translateY(-5px) !important;
+            border-color: var(--accent-1);
+        }
+        .card h3 {
+            font-size: 1.4rem;
+        }
+        .card h4 {
+            color: var(--secondary-text);
+            font-weight: 400;
+            font-size: 1rem;
+        }
+        .card .date {
+            color: var(--accent-1);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        #experience .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
         .institution-logo {
-            width: 55px; height: 55px; border-radius: 8px; /* DIKECILKAN */
+            width: 55px;
+            height: 55px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
-            padding: 5px; background: rgba(255,255,255,0.05); object-fit: contain; flex-shrink: 0;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            object-fit: contain;
+            flex-shrink: 0;
         }
-
-        .section-nav { text-align: center; margin-top: 4rem; }
         
-        /* Modal (Pop-up) Styles */
+        /* --- Modal (Popup) Styles --- */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
-            display: none; align-items: center; justify-content: center;
-            z-index: 10000; opacity: 0; transition: opacity 0.3s;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
         .modal-content {
-            background: var(--bg-card); border-radius: 12px;
+            background: var(--bg-card);
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            width: 90%; max-width: 900px;
+            width: 90%;
+            max-width: 900px;
             max-height: 90vh;
-            display: flex; flex-direction: column;
+            display: flex;
+            flex-direction: column;
             transform: scale(0.95);
             transition: transform 0.3s;
+            position: relative; /* Added for close button positioning */
         }
-        .modal-overlay.show .modal-content { transform: scale(1); }
-        .modal-header { padding: 1.5rem 2.5rem; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
-        .modal-body { padding: 2.5rem; overflow-y: auto; }
-        .modal-body h3 { font-size: 1.7rem; color: var(--accent-1); }
-        .modal-body h4 { font-size: 1.1rem; }
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-header {
+            padding: 1.5rem 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .modal-body {
+            padding: 2.5rem;
+            overflow-y: auto;
+        }
+        .modal-body h3 {
+            font-size: 1.7rem;
+            color: var(--accent-1);
+        }
+        .modal-body h4 {
+            font-size: 1.1rem;
+        }
         .close-modal-btn {
-            position: absolute; top: 1rem; right: 1.5rem;
-            background: none; border: none; font-size: 2rem;
-            color: var(--secondary-text); cursor: pointer; transition: color 0.3s;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--secondary-text);
+            cursor: pointer;
+            transition: color 0.3s;
         }
-        .close-modal-btn:hover { color: var(--primary-text); }
-        .context { font-size: 1rem; margin-top: 1.5rem; color: var(--secondary-text); border-left: 3px solid var(--accent-1); padding-left: 1rem; }
+        .close-modal-btn:hover {
+            color: var(--primary-text);
+        }
+        .context {
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            color: var(--secondary-text);
+            border-left: 3px solid var(--accent-1);
+            padding-left: 1rem;
+        }
         .gallery-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
         }
         .gallery-grid img {
-            width: 100%; height: 180px; object-fit: cover; /* DIKECILKAN */
-            border-radius: 8px; border: 1px solid var(--border-color);
-            transition: transform 0.3s; cursor: pointer;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+            cursor: pointer;
         }
-        .gallery-grid img:hover { transform: scale(1.05); }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
 
-        .tabs { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
-        .tab-button { background: none; border: 1px solid var(--border-color); color: var(--secondary-text); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-size: 0.95rem; }
-        .tab-button.active { color: var(--bg-dark); background: var(--accent-1); border-color: var(--accent-1); }
-        .tab-content { display: none; font-size: 1rem; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .tool-badge { display: inline-block; background-color: #374151; padding: 0.5rem 1rem; margin: 0.25rem; border-radius: 5px; font-weight: 400; font-size: 0.9rem; }
+        /* --- Tabs in Modal --- */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .tab-button {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-text);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        .tab-button.active {
+            color: var(--bg-dark);
+            background: var(--accent-1);
+            border-color: var(--accent-1);
+        }
+        .tab-content {
+            display: none;
+            font-size: 1rem;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .tools {
+             margin-top: 1.5rem;
+        }
+        .tool-badge {
+            display: inline-block;
+            background-color: #374151;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border-radius: 5px;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
 
-        .lightbox { /* Lightbox for full-screen images */ }
-        
-        @media (max-width: 900px) { .card-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) { .navbar ul { display: none; } }
+        /* --- Lightbox for full-screen images --- */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center; justify-content: center;
+            z-index: 10002;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        .lightbox .close-btn {
+            position: absolute;
+            top: 2rem; right: 2rem;
+            color: white; font-size: 3rem;
+            cursor: pointer;
+        }
 
-
-        /* --- Gaya untuk "Contact Me" --- */
+        /* --- "Contact Me" Section Styles --- */
         .contact-wrapper {
             width: 100%;
             max-width: 400px;
@@ -185,7 +476,6 @@
             align-items: center;
             gap: 1rem;
         }
-
         .contact-title {
             font-size: 1rem;
             font-weight: 600;
@@ -193,17 +483,15 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
-        .hero-contact {
+        #hero .hero-contact {
             margin-top: 0;
         }
 
-        /* --- Gaya untuk Notifikasi Copy --- */
+        /* --- Copy Notification Styles --- */
         .copy-notification {
             position: fixed;
             bottom: 30px;
             left: 50%;
-            transform: translateX(-50%);
             background-color: var(--bg-card);
             color: var(--primary-text);
             padding: 12px 24px;
@@ -216,11 +504,25 @@
             transform: translate(-50%, 20px);
             transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
         }
-
         .copy-notification.show {
             opacity: 1;
             visibility: visible;
             transform: translate(-50%, 0);
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -252,13 +554,13 @@
                     <div class="animated-subtitle">
                         <div class="titles">
                             <span>Biomedical Engineer</span>
-                            <span>Medical instrumentation Enthusiast</span>
-                            <span>Artifical Intellegence Enthusiast</span>
+                            <span>Medical Instrumentation Enthusiast</span>
+                            <span>Artificial Intelligence Enthusiast</span>
                         </div>
                     </div>
-                     <div class="hero-buttons">
-                          <a href="#about" class="cta-button secondary nav-link">Get To Know Me</a>
-                          <a href="#projects" class="cta-button nav-link">View My Work</a>
+                    <div class="hero-buttons">
+                        <a href="#about" class="cta-button secondary nav-link">Get To Know Me</a>
+                        <a href="#projects" class="cta-button nav-link">View My Work</a>
                     </div>
                     <div class="contact-wrapper">
                         <h4 class="contact-title">CONTACT ME</h4>
@@ -271,14 +573,13 @@
             </section>
 
             <section id="about" class="page-section">
-                 <h2 class="section-title">About Me</h2>
-                 <p style="text-align:center; max-width: 800px; margin: 0 auto; font-size: 1.1rem;">I am a Biomedical Engineering fresh graduate from Airlangga University with academic and internship experience in medical instrumentation, electronics, and machine learning. During my studies and internships in Indonesia and Taiwan, I gained hands-on exposure to projects including the development of health monitoring devices, the application of AI for healthcare prediction, and the creation of web-based systems for medical device automation.</p>
-                 <br>
-                 <p style="text-align:center; max-width: 800px; margin: 0 auto; font-size: 1.1rem;"> With broad exposure to programming, electronics, and hardware design, I enjoy learning new skills and adapting to different challenges. I am eager to begin my professional career with a focus on healthcare technology while remaining open to opportunities in other fields where I can grow, contribute to meaningful projects, and build expertise over time.</p>
-                 <div class="section-nav">
+                <h2 class="section-title">About Me</h2>
+                <p class="about-text">I am a Biomedical Engineering fresh graduate from Airlangga University with academic and internship experience in medical instrumentation, electronics, and machine learning. During my studies and internships in Indonesia and Taiwan, I gained hands-on exposure to projects including the development of health monitoring devices, the application of AI for healthcare prediction, and the creation of web-based systems for medical device automation.</p>
+                <p class="about-text">With broad exposure to programming, electronics, and hardware design, I enjoy learning new skills and adapting to different challenges. I am eager to begin my professional career with a focus on healthcare technology while remaining open to opportunities in other fields where I can grow, contribute to meaningful projects, and build expertise over time.</p>
+                <div class="section-nav">
                     <a href="#hero" class="cta-button secondary nav-link">Home</a>
                     <a href="#education" class="cta-button nav-link">My Education</a>
-                 </div>
+                </div>
             </section>
 
             <section id="education" class="page-section">
@@ -309,17 +610,17 @@
                         </template>
                     </div>
                 </div>
-                 <div class="section-nav">
+                <div class="section-nav">
                     <a href="#about" class="cta-button secondary nav-link">About Me</a>
                     <a href="#experience" class="cta-button nav-link">My Experience</a>
-                 </div>
+                </div>
             </section>
-            
+
             <section id="experience" class="page-section">
                 <h2 class="section-title">Internship Experience</h2>
                 <div class="card-grid">
                     <div class="card modal-trigger">
-                         <div class="card-header">
+                        <div class="card-header">
                             <img src="WTMH.png" alt="WTMH Lab Logo" class="institution-logo">
                             <div>
                                 <h3>PAG/ECG Team Intern</h3>
@@ -330,14 +631,13 @@
                         <template class="card-details-template">
                             <p class="context">A research-intensive program focusing on wearable device and artificial intellegence in healthcare.</p>
                             <div class="gallery-grid">
-                                <img src="exp1_wtmh.jpg" alt="Documentation 1"><img src="exp2_wtmh.jpg" alt="Documentation 2">
-                                <!-- <img src="exp3_wtmh.jpg" alt="Documentation 3"><img src="exp4_wtmh.jpg" alt="Documentation 4"> -->
+                                <img src="exp1_wtmh.jpg" alt="Documentation 1">
+                                <img src="exp2_wtmh.jpg" alt="Documentation 2">
                             </div>
                         </template>
                     </div>
-
                     <div class="card modal-trigger">
-                         <div class="card-header">
+                        <div class="card-header">
                             <img src="elitech_logo.png" alt="ELITECH Logo" class="institution-logo">
                             <div>
                                 <h3>Quality Control Intern</h3>
@@ -345,10 +645,11 @@
                                 <p class="date">August 2024 - December 2024</p>
                             </div>
                         </div>
-                         <template class="card-details-template">
+                        <template class="card-details-template">
                             <p class="context">Developed a full-stack web application to automate and digitize quality control workflows.</p>
                             <div class="gallery-grid">
-                                <img src="exp1_sinco.jpg" alt="Documentation 1"><img src="exp2_sinco.jpg" alt="Documentation 2">
+                                <img src="exp1_sinco.jpg" alt="Documentation 1">
+                                <img src="exp2_sinco.jpg" alt="Documentation 2">
                             </div>
                         </template>
                     </div>
@@ -357,14 +658,15 @@
                             <img src="logo_bangkit.jpg" alt="Bangkit Academy Logo" class="institution-logo">
                             <div>
                                 <h3>Machine Learning Cohort</h3>
-                                <h4>Bangkit Academy  led by Google, GoTo, & Traveloka - Indonesia</h4>
+                                <h4>Bangkit Academy led by Google, GoTo, & Traveloka - Indonesia</h4>
                                 <p class="date">February 2024 - July 2024</p>
                             </div>
                         </div>
-                         <template class="card-details-template">
+                        <template class="card-details-template">
                             <p class="context">An intensive, Google-led program on practical ML skills, culminating in a capstone project.</p>
                             <div class="gallery-grid">
-                                <img src="exp1_bangkit.png" alt="Documentation 1"><img src="exp2_bangkit.png" alt="Documentation 2">
+                                <img src="exp1_bangkit.png" alt="Documentation 1">
+                                <img src="exp2_bangkit.png" alt="Documentation 2">
                             </div>
                         </template>
                     </div>
@@ -377,16 +679,16 @@
                                 <p class="date">January 2024 - February 2024</p>
                             </div>
                         </div>
-                         <template class="card-details-template">
+                        <template class="card-details-template">
                             <p class="context">Gained hands-on experience in the full production cycle of electromedical devices.</p>
                             <div class="gallery-grid">
-                                <img src="exp2_onemed.jpg" alt="Documentation 1"><img src="exp1_onemed.jpg" alt="Documentation 2">
-                                <!-- <img src="exp-placeholder-3.png" alt="Documentation 3"><img src="exp-placeholder-4.png" alt="Documentation 4"> -->
+                                <img src="exp2_onemed.jpg" alt="Documentation 1">
+                                <img src="exp1_onemed.jpg" alt="Documentation 2">
                             </div>
                         </template>
                     </div>
                     <div class="card modal-trigger">
-                         <div class="card-header">
+                        <div class="card-header">
                             <img src="logo_inbiomed.jpg" alt="INBIOMED Logo" class="institution-logo">
                             <div>
                                 <h3>Research Intern</h3>
@@ -394,11 +696,11 @@
                                 <p class="date">June 2023 - December 2023</p>
                             </div>
                         </div>
-                         <template class="card-details-template">
+                        <template class="card-details-template">
                             <p class="context">Contributed to post-stroke therapy research by operating robotics and collecting biosignal data.</p>
                             <div class="gallery-grid">
-                                <img src="exp1_inbiomed.png" alt="Documentation 1"><img src="exp2_inbiomed.png" alt="Documentation 2">
-                                <!-- <img src="exp-placeholder-3.png" alt="Documentation 3"><img src="exp-placeholder-4.png" alt="Documentation 4"> -->
+                                <img src="exp1_inbiomed.png" alt="Documentation 1">
+                                <img src="exp2_inbiomed.png" alt="Documentation 2">
                             </div>
                         </template>
                     </div>
@@ -406,13 +708,12 @@
                 <div class="section-nav">
                     <a href="#education" class="cta-button secondary nav-link">My Education</a>
                     <a href="#projects" class="cta-button nav-link">My Projects</a>
-                 </div>
+                </div>
             </section>
 
             <section id="projects" class="page-section">
                 <h2 class="section-title">Featured Projects</h2>
                 <div class="card-grid">
-                    <!-- Smart Therapeutic Heat Pad -->
                     <div class="card modal-trigger">
                         <h3>Smart Heat Pad for Osteoarthritis Therapy</h3>
                         <h4>Undergraduate Thesis Project</h4>
@@ -447,105 +748,166 @@
                         </template>
                     </div>
 
-                    <!-- Hospital Outcome Prediction Model -->
                     <div class="card modal-trigger">
                         <h3>Hospital Outcome Prediction Model</h3>
                         <h4>Internship Project at WTMH Lab, NCKU, Taiwan</h4>
                         <template class="card-details-template">
                             <div class="tabs">
-                                <button class="tab-button active" data-target="p1-what">What</button> <button class="tab-button" data-target="p1-how">How</button> <button class="tab-button" data-target="p1-result">Result</button>
+                                <button class="tab-button active" data-target="p1-what">What</button>
+                                <button class="tab-button" data-target="p1-how">How</button>
+                                <button class="tab-button" data-target="p1-result">Result</button>
                             </div>
-                            <div id="p1-what" class="tab-content active"><p>Developing a predictive model using electronic health records (EHRs) to forecast patient length of stay (LOS) and discharge outcomes, helping hospitals optimize resources.</p></div>
-                            <div id="p1-how" class="tab-content"><p>Processed and engineered 70 features from 13,415 EHRs. Implemented and benchmarked Multi-Task Learning (MTL), CatBoost, and an Ensemble Learning (EL) framework.</p></div>
-                            <div id="p1-result" class="tab-content"><p>The EL model achieved 82.55% accuracy and an MAE of 3.1 days for LOS prediction. Successfully demonstrated MTL's effectiveness for multi-output prediction.</p></div>
+                            <div id="p1-what" class="tab-content active">
+                                <p>Developing a predictive model using electronic health records (EHRs) to forecast patient length of stay (LOS) and discharge outcomes, helping hospitals optimize resources.</p>
+                            </div>
+                            <div id="p1-how" class="tab-content">
+                                <p>Processed and engineered 70 features from 13,415 EHRs. Implemented and benchmarked Multi-Task Learning (MTL), CatBoost, and an Ensemble Learning (EL) framework.</p>
+                            </div>
+                            <div id="p1-result" class="tab-content">
+                                <p>The EL model achieved 82.55% accuracy and an MAE of 3.1 days for LOS prediction. Successfully demonstrated MTL's effectiveness for multi-output prediction.</p>
+                            </div>
                             <div class="gallery-grid">
-                                <img src="doc_ifmbe_1.png" alt="Documentation 1"><img src="doc_ifmbe_2.png" alt="Documentation 2">
-                                <!-- <img src="project-placeholder-3.png" alt="Documentation 3"><img src="project-placeholder-4.png" alt="Documentation 4"> -->
+                                <img src="doc_ifmbe_1.png" alt="Documentation 1">
+                                <img src="doc_ifmbe_2.png" alt="Documentation 2">
                             </div>
-                            <div class="tools"><span class="tool-badge">Python</span><span class="tool-badge">Scikit-learn</span><span class="tool-badge">Pandas</span></div>
+                            <div class="tools">
+                                <span class="tool-badge">Python</span>
+                                <span class="tool-badge">Scikit-learn</span>
+                                <span class="tool-badge">Pandas</span>
+                            </div>
                         </template>
                     </div>
 
-                    <!-- ECG-Based Disease Classification -->
                     <div class="card modal-trigger">
                         <h3>ECG-Based Disease Classification</h3>
                         <h4>Internship Project at WTMH Lab, NCKU, Taiwan</h4>
                         <template class="card-details-template">
                             <div class="tabs">
-                                <button class="tab-button active" data-target="p2-what">What</button> <button class="tab-button" data-target="p2-how">How</button> <button class="tab-button" data-target="p2-result">Result</button>
+                                <button class="tab-button active" data-target="p2-what">What</button>
+                                <button class="tab-button" data-target="p2-how">How</button>
+                                <button class="tab-button" data-target="p2-result">Result</button>
                             </div>
-                            <div id="p2-what" class="tab-content active"><p>Designing a highly efficient, lightweight deep learning model to accurately classify cardiovascular conditions like arrhythmia from ECG signals, even with limited training data.</p></div>
-                            <div id="p2-how" class="tab-content"><p>Developed "FSL-SEmbedNet," a novel few-shot learning architecture. Preprocessed ECG signals with FIR filtering and extracted features using Continuous Wavelet Transforms (CWT).</p></div>
-                            <div id="p2-result" class="tab-content"><p>Developed an ultra-lightweight model (0.49 MB) that achieved up to 88.24% accuracy in 1-shot testing, outperforming the much larger ResNet-50 model.</p></div>
+                            <div id="p2-what" class="tab-content active">
+                                <p>Designing a highly efficient, lightweight deep learning model to accurately classify cardiovascular conditions like arrhythmia from ECG signals, even with limited training data.</p>
+                            </div>
+                            <div id="p2-how" class="tab-content">
+                                <p>Developed "FSL-SEmbedNet," a novel few-shot learning architecture. Preprocessed ECG signals with FIR filtering and extracted features using Continuous Wavelet Transforms (CWT).</p>
+                            </div>
+                            <div id="p2-result" class="tab-content">
+                                <p>Developed an ultra-lightweight model (0.49 MB) that achieved up to 88.24% accuracy in 1-shot testing, outperforming the much larger ResNet-50 model.</p>
+                            </div>
                             <div class="gallery-grid">
-                                <img src="doc_tsbme_1.png" alt="Documentation 1"><img src="doc_tsbme_2.png" alt="Documentation 2">
-                                <!-- <img src="project-placeholder-3.png" alt="Documentation 3"><img src="project-placeholder-4.png" alt="Documentation 4"> -->
+                                <img src="doc_tsbme_1.png" alt="Documentation 1">
+                                <img src="doc_tsbme_2.png" alt="Documentation 2">
                             </div>
-                            <div class="tools"><span class="tool-badge">TensorFlow</span><span class="tool-badge">Keras</span><span class="tool-badge">Signal Processing</span></div>
+                            <div class="tools">
+                                <span class="tool-badge">TensorFlow</span>
+                                <span class="tool-badge">Keras</span>
+                                <span class="tool-badge">Signal Processing</span>
+                            </div>
                         </template>
                     </div>
 
-                    <!-- Wearable Health Monitoring Device -->
                     <div class="card modal-trigger">
                         <h3>Wearable Health Monitoring Device</h3>
                         <h4>Internship Project at WTMH Lab, NCKU, Taiwan</h4>
                         <template class="card-details-template">
                             <div class="tabs">
-                                <button class="tab-button active" data-target="p3-what">What</button> <button class="tab-button" data-target="p3-how">How</button> <button class="tab-button" data-target="p3-result">Result</button>
+                                <button class="tab-button active" data-target="p3-what">What</button>
+                                <button class="tab-button" data-target="p3-how">How</button>
+                                <button class="tab-button" data-target="p3-result">Result</button>
                             </div>
-                            <div id="p3-what" class="tab-content active"><p>Building a functional hardware prototype of a multi-sensor wearable for real-time acquisition and visualization of critical physiological signals (PPG and ECG).</p></div>
-                            <div id="p3-how" class="tab-content"><p>Designed a modular system using ESP32-S3 microcontrollers, integrating MAX30102 PPG and BMD101 ECG sensors. Developed a custom GUI for real-time visualization via a Raspberry Pi.</p></div>
-                            <div id="p3-result" class="tab-content"><p>A complete hardware prototype with real-time data streaming. Successfully validated device accuracy for both ECG and PPG signals using a WhaleTeq AECG100 simulator.</p></div>
+                            <div id="p3-what" class="tab-content active">
+                                <p>Building a functional hardware prototype of a multi-sensor wearable for real-time acquisition and visualization of critical physiological signals (PPG and ECG).</p>
+                            </div>
+                            <div id="p3-how" class="tab-content">
+                                <p>Designed a modular system using ESP32-S3 microcontrollers, integrating MAX30102 PPG and BMD101 ECG sensors. Developed a custom GUI for real-time visualization via a Raspberry Pi.</p>
+                            </div>
+                            <div id="p3-result" class="tab-content">
+                                <p>A complete hardware prototype with real-time data streaming. Successfully validated device accuracy for both ECG and PPG signals using a WhaleTeq AECG100 simulator.</p>
+                            </div>
                             <div class="gallery-grid">
-                                <img src="doc_ppg_1.png" alt="Documentation 1"><img src="doc_ppg_2.png" alt="Documentation 2"><img src="doc_ppg_3.png" alt="Documentation 3"><img src="doc_ppg_4.png" alt="Documentation 4">
+                                <img src="doc_ppg_1.png" alt="Documentation 1">
+                                <img src="doc_ppg_2.png" alt="Documentation 2">
+                                <img src="doc_ppg_3.png" alt="Documentation 3">
+                                <img src="doc_ppg_4.png" alt="Documentation 4">
                             </div>
-                            <div class="tools"><span class="tool-badge">ESP32</span><span class="tool-badge">C/C++</span><span class="tool-badge">KiCad</span></div>
+                            <div class="tools">
+                                <span class="tool-badge">ESP32</span>
+                                <span class="tool-badge">C/C++</span>
+                                <span class="tool-badge">KiCad</span>
+                            </div>
                         </template>
                     </div>
 
-                    <!-- Dermatify: AI Skin Analyzer -->
                     <div class="card modal-trigger">
-                       <h3>Dermatify: AI Skin Analyzer</h3>
-                        <h4>Capstone Deign for Bangkit Academy</h4>
+                        <h3>Dermatify: AI Skin Analyzer</h3>
+                        <h4>Capstone Design for Bangkit Academy</h4>
                         <template class="card-details-template">
                             <div class="tabs">
-                                <button class="tab-button active" data-target="p4-what">What</button> <button class="tab-button" data-target="p4-how">How</button> <button class="tab-button" data-target="p4-result">Result</button>
+                                <button class="tab-button active" data-target="p4-what">What</button>
+                                <button class="tab-button" data-target="p4-how">How</button>
+                                <button class="tab-button" data-target="p4-result">Result</button>
                             </div>
-                            <div id="p4-what" class="tab-content active"><p>Building a mobile application, "Dermatify," capable of identifying common skin conditions instantly using a phone's camera.</p></div>
-                            <div id="p4-how" class="tab-content"><p>As ML lead, trained a CNN model with MobileNetV2 architecture on a custom dataset. The model was optimized and deployed to Google Cloud Platform for API access by the Android app.</p></div>
-                            <div id="p4-result" class="tab-content"><p>Achieved 90.63% validation accuracy. Successful deployment on GCP with low latency, resulting in a functional app from a full end-to-end collaboration (ML, Cloud, Mobile).</p></div>
+                            <div id="p4-what" class="tab-content active">
+                                <p>Building a mobile application, "Dermatify," capable of identifying common skin conditions instantly using a phone's camera.</p>
+                            </div>
+                            <div id="p4-how" class="tab-content">
+                                <p>As ML lead, trained a CNN model with MobileNetV2 architecture on a custom dataset. The model was optimized and deployed to Google Cloud Platform for API access by the Android app.</p>
+                            </div>
+                            <div id="p4-result" class="tab-content">
+                                <p>Achieved 90.63% validation accuracy. Successful deployment on GCP with low latency, resulting in a functional app from a full end-to-end collaboration (ML, Cloud, Mobile).</p>
+                            </div>
                             <div class="gallery-grid">
-                                <img src="doc_bangkit_1.png" alt="Documentation 1"><img src="doc_bangkit_2.png" alt="Documentation 2">
-                                <!-- <img src="project-placeholder-3.png" alt="Documentation 3"><img src="project-placeholder-4.png" alt="Documentation 4"> -->
+                                <img src="doc_bangkit_1.png" alt="Documentation 1">
+                                <img src="doc_bangkit_2.png" alt="Documentation 2">
                             </div>
-                            <div class="tools"><span class="tool-badge">TensorFlow</span><span class="tool-badge">Google Cloud</span><span class="tool-badge">CNN</span></div>
+                            <div class="tools">
+                                <span class="tool-badge">TensorFlow</span>
+                                <span class="tool-badge">Google Cloud</span>
+                                <span class="tool-badge">CNN</span>
+                            </div>
                         </template>
                     </div>
 
-                    <!-- Quality Control Information System -->
                     <div class="card modal-trigger">
                         <h3>Quality Control Information System</h3>
                         <h4>Internship Project at PT Sinko Prima Alloy (ELITECH)</h4>
                         <template class="card-details-template">
                             <div class="tabs">
-                                <button class="tab-button active" data-target="p5-what">What</button> <button class="tab-button" data-target="p5-how">How</button> <button class="tab-button" data-target="p5-result">Result</button>
+                                <button class="tab-button active" data-target="p5-what">What</button>
+                                <button class="tab-button" data-target="p5-how">How</button>
+                                <button class="tab-button" data-target="p5-result">Result</button>
                             </div>
-                            <div id="p5-what" class="tab-content active"><p>Digitizing and automating the entire Quality Control (QC) workflow for medical devices through a web-based system to overcome inefficiencies from manual documentation.</p></div>
-                            <div id="p5-how" class="tab-content"><p>Designed and developed a full-stack system using the Laravel (PHP) framework and MySQL. Built features like validated forms, searchable data histories, and an interactive analytics dashboard.</p></div>
-                            <div id="p5-result" class="tab-content"><p>Increased operational efficiency by approximately 50% and significantly reduced human error in calibration and testing data entry.</p></div>
-                             <div class="gallery-grid">
-                                <img src="doc_sinco_1.png" alt="Documentation 1"><img src="doc_sinco_2.png" alt="Documentation 2"><img src="doc_sinco_3.png" alt="Documentation 3"><img src="doc_sinco_4.png" alt="Documentation 4">
+                            <div id="p5-what" class="tab-content active">
+                                <p>Digitizing and automating the entire Quality Control (QC) workflow for medical devices through a web-based system to overcome inefficiencies from manual documentation.</p>
                             </div>
-                            <div class="tools"><span class="tool-badge">Laravel</span><span class="tool-badge">PHP</span><span class="tool-badge">MySQL</span></div>
+                            <div id="p5-how" class="tab-content">
+                                <p>Designed and developed a full-stack system using the Laravel (PHP) framework and MySQL. Built features like validated forms, searchable data histories, and an interactive analytics dashboard.</p>
+                            </div>
+                            <div id="p5-result" class="tab-content">
+                                <p>Increased operational efficiency by approximately 50% and significantly reduced human error in calibration and testing data entry.</p>
+                            </div>
+                            <div class="gallery-grid">
+                                <img src="doc_sinco_1.png" alt="Documentation 1">
+                                <img src="doc_sinco_2.png" alt="Documentation 2">
+                                <img src="doc_sinco_3.png" alt="Documentation 3">
+                                <img src="doc_sinco_4.png" alt="Documentation 4">
+                            </div>
+                            <div class="tools">
+                                <span class="tool-badge">Laravel</span>
+                                <span class="tool-badge">PHP</span>
+                                <span class="tool-badge">MySQL</span>
+                            </div>
                         </template>
                     </div>
                 </div>
-                 <div class="section-nav">
+                <div class="section-nav">
                     <a href="#experience" class="cta-button secondary nav-link">My Experience</a>
                     <a href="#organization" class="cta-button nav-link">My Organization Experience</a>
-                 </div>
+                </div>
             </section>
-            
+
             <section id="organization" class="page-section">
                 <h2 class="section-title">Organizational Experience</h2>
                 <div class="card-grid">
@@ -565,7 +927,7 @@
                         <h3>Staff of Scientific Department</h3>
                         <h4>BEM FST Airlangga University</h4>
                         <p class="date">Jan 2022 - Jan 2023</p>
-                         <template class="card-details-template">
+                        <template class="card-details-template">
                             <h3>Key Contributions</h3>
                             <ul>
                                 <li>Reviewed 4 scientific journals into engaging infographics with a 92% success rate.</li>
@@ -575,13 +937,13 @@
                     </div>
                 </div>
                 <div class="section-nav">
-                    <a href="#project" class="cta-button secondary nav-link">My Project</a>
+                    <a href="#projects" class="cta-button secondary nav-link">My Projects</a>
                     <a href="#hero" class="cta-button nav-link">Home</a>
-                 </div>
+                </div>
             </section>
         </main>
     </div>
-    
+
     <div id="portfolio-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-modal-btn">&times;</button>
@@ -589,153 +951,169 @@
             <div class="modal-body"></div>
         </div>
     </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Spotlight mouse follow effect ---
+            const spotlight = document.querySelector('.spotlight');
+            window.addEventListener('mousemove', e => {
+                spotlight.style.setProperty('--x', e.clientX + 'px');
+                spotlight.style.setProperty('--y', e.clientY + 'px');
+            });
 
-<script>
-    // Sisa kode JavaScript Anda tetap sama, tidak perlu diubah
-    document.addEventListener('DOMContentLoaded', function() {
-        const spotlight = document.querySelector('.spotlight');
-        window.addEventListener('mousemove', e => {
-            spotlight.style.setProperty('--x', e.clientX + 'px');
-            spotlight.style.setProperty('--y', e.clientY + 'px');
-        });
+            // --- Single-page navigation ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-section');
+            const mainContentArea = document.querySelector('main');
 
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pages = document.querySelectorAll('.page-section');
-        const mainContentArea = document.querySelector('main');
-
-        function showPage(targetId, isInstant = false) {
-            pages.forEach(page => page.classList.remove('visible'));
-            const targetPage = document.querySelector(targetId);
-            if(targetPage) {
-                if (!isInstant) mainContentArea.scrollTop = 0;
-                targetPage.classList.add('visible');
+            function showPage(targetId, isInstant = false) {
+                pages.forEach(page => page.classList.remove('visible'));
+                const targetPage = document.querySelector(targetId);
+                if (targetPage) {
+                    if (!isInstant) mainContentArea.scrollTop = 0;
+                    targetPage.classList.add('visible');
+                }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === targetId) {
+                        link.classList.add('active');
+                    }
+                });
             }
+            showPage('#hero', true); // Show hero page on initial load
+
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if(link.getAttribute('href') === targetId) link.classList.add('active');
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    showPage(targetId);
+                });
             });
-        }
-        showPage('#hero', true);
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                showPage(targetId);
+            // --- Modal handling ---
+            const modal = document.getElementById('portfolio-modal');
+            const modalHeader = modal.querySelector('.modal-header');
+            const modalBody = modal.querySelector('.modal-body');
+            const closeModalBtn = modal.querySelector('.close-modal-btn');
+
+            document.querySelectorAll('.modal-trigger').forEach(card => {
+                card.addEventListener('click', () => {
+                    // Clone card content for the modal header, excluding the details template
+                    const headerContent = card.cloneNode(true);
+                    const detailsTemplate = headerContent.querySelector('.card-details-template');
+                    if (detailsTemplate) detailsTemplate.remove();
+
+                    // Get the content from the details template for the modal body
+                    const detailsContent = card.querySelector('.card-details-template');
+
+                    modalHeader.innerHTML = '';
+                    modalHeader.appendChild(headerContent);
+
+                    modalBody.innerHTML = '';
+                    if (detailsContent) {
+                        modalBody.appendChild(detailsContent.content.cloneNode(true));
+                    }
+
+                    // Initialize features inside the new modal content
+                    initModalTabs(modalBody);
+                    initModalLightbox(modalBody);
+                    modal.classList.add('show');
+                });
             });
-        });
 
-        const modal = document.getElementById('portfolio-modal');
-        const modalHeader = modal.querySelector('.modal-header');
-        const modalBody = modal.querySelector('.modal-body');
-        const closeModalBtn = modal.querySelector('.close-modal-btn');
+            function closeModal() {
+                modal.classList.remove('show');
+            }
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', e => {
+                if (e.target === modal) closeModal(); // Close if clicking on the overlay
+            });
+            window.addEventListener('keydown', e => {
+                if (e.key === 'Escape') closeModal(); // Close with Escape key
+            });
 
-        document.querySelectorAll('.modal-trigger').forEach(card => {
-            card.addEventListener('click', () => {
-                const headerContent = card.cloneNode(true);
-                const detailsTemplate = headerContent.querySelector('.card-details-template');
-                if(detailsTemplate) detailsTemplate.remove();
-                
-                const detailsContent = card.querySelector('.card-details-template');
+            // --- Initialize tabs within the modal ---
+            function initModalTabs(container) {
+                const tabs = container.querySelectorAll('.tab-button');
+                const contents = container.querySelectorAll('.tab-content');
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent modal from closing if tabs are inside the trigger card
+                        tabs.forEach(t => t.classList.remove('active'));
+                        contents.forEach(c => c.classList.remove('active'));
+                        tab.classList.add('active');
+                        const targetContent = container.querySelector('#' + tab.dataset.target);
+                        if (targetContent) targetContent.classList.add('active');
+                    });
+                });
+            }
 
-                modalHeader.innerHTML = '';
-                modalHeader.appendChild(headerContent);
-                
-                modalBody.innerHTML = '';
-                if(detailsContent) {
-                    modalBody.appendChild(detailsContent.content.cloneNode(true));
+            // --- Initialize lightbox for images within the modal ---
+            const lightbox = document.createElement('div');
+            lightbox.className = 'lightbox';
+            lightbox.innerHTML = `<span class="close-btn">&times;</span><img src="" alt="Enlarged documentation">`;
+            document.body.appendChild(lightbox);
+            const lightboxImg = lightbox.querySelector('img');
+            const lightboxCloseBtn = lightbox.querySelector('.close-btn');
+
+            function initModalLightbox(container) {
+                container.querySelectorAll('.gallery-grid img').forEach(img => {
+                    img.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        lightboxImg.src = img.src;
+                        lightbox.classList.add('show');
+                    });
+                });
+            }
+            lightboxCloseBtn.addEventListener('click', () => lightbox.classList.remove('show'));
+            lightbox.addEventListener('click', e => {
+                if (e.target === lightbox) lightbox.classList.remove('show');
+            });
+
+            // --- Copy Email to Clipboard ---
+            const copyEmailBtn = document.getElementById('copy-email-btn');
+
+            copyEmailBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const emailAddress = this.dataset.email;
+                navigator.clipboard.writeText(emailAddress).then(() => {
+                    showNotification('Email copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy email: ', err);
+                    showNotification('Failed to copy email!', true);
+                });
+            });
+
+            function showNotification(message, isError = false) {
+                // Remove any existing notification first
+                const existingNotif = document.querySelector('.copy-notification');
+                if (existingNotif) {
+                    existingNotif.remove();
                 }
 
-                initModalTabs(modalBody);
-                initModalLightbox(modalBody);
-                modal.classList.add('show');
-            });
-        });
-
-        function closeModal() {
-            modal.classList.remove('show');
-        }
-        closeModalBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', e => {
-            if (e.target === modal) closeModal();
-        });
-        window.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeModal();
-        });
-        
-        function initModalTabs(container) {
-            const tabs = container.querySelectorAll('.tab-button');
-            const contents = container.querySelectorAll('.tab-content');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    tabs.forEach(t => t.classList.remove('active'));
-                    contents.forEach(c => c.classList.remove('active'));
-                    tab.classList.add('active');
-                    const targetContent = container.querySelector('#' + tab.dataset.target);
-                    if (targetContent) targetContent.classList.add('active');
-                });
-            });
-        }
-
-        const lightbox = document.createElement('div');
-        lightbox.className = 'lightbox';
-        lightbox.innerHTML = `<span class="close-btn">&times;</span><img src="" alt="Enlarged documentation">`;
-        document.body.appendChild(lightbox);
-        const lightboxImg = lightbox.querySelector('img');
-        const lightboxCloseBtn = lightbox.querySelector('.close-btn');
-
-        function initModalLightbox(container) {
-            container.querySelectorAll('.gallery-grid img').forEach(img => {
-                img.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    lightboxImg.src = img.src;
-                    lightbox.classList.add('show');
-                });
-            });
-        }
-        lightboxCloseBtn.addEventListener('click', () => lightbox.classList.remove('show'));
-        lightbox.addEventListener('click', e => {
-            if (e.target === lightbox) lightbox.classList.remove('show');
-        });
-
-        const copyEmailBtn = document.getElementById('copy-email-btn');
-
-        copyEmailBtn.addEventListener('click', function(event) {
-            event.preventDefault(); 
-            const emailAddress = this.dataset.email;
-            navigator.clipboard.writeText(emailAddress).then(() => {
-                showNotification('Email copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy email: ', err);
-                showNotification('Failed to copy email!', true);
-            });
-        });
-
-        function showNotification(message, isError = false) {
-            const existingNotif = document.querySelector('.copy-notification');
-            if (existingNotif) {
-                existingNotif.remove();
-            }
-            const notification = document.createElement('div');
-            notification.className = 'copy-notification';
-            notification.textContent = message;
-            if (isError) {
-                notification.style.borderColor = '#f87171';
-            }
-            document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 10);
-            setTimeout(() => {
-                notification.classList.remove('show');
+                // Create and append the new notification
+                const notification = document.createElement('div');
+                notification.className = 'copy-notification';
+                notification.textContent = message;
+                if (isError) {
+                    notification.style.borderColor = '#f87171'; // Error color
+                }
+                document.body.appendChild(notification);
+                
+                // Animate in
                 setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            }, 3000);
-        }
-    });
-</script>
-
+                    notification.classList.add('show');
+                }, 10);
+                
+                // Animate out and remove after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300); // Wait for transition to finish
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
